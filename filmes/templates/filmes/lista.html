@@ -1,0 +1,20 @@
+<h1>Minha watchlist</h1>
+
+<a href="{% url 'novo' %}">+ Novo filme</a>
+
+<ul>
+    {% for filme in filmes %}
+    <li>
+        
+        <form action="{% url 'excluir' filme.id %}" method="post">
+            {% csrf_token %}
+            {{ filme.titulo }} ({{ filme.ano }})
+            <a href="{% url 'editar' filme.id %}">Editar</a>
+            <button>Excluir</button>
+        </form>
+    </li>
+
+    {% empty %}
+    <li>Nenhum filme cadastrado.</li>
+    {% endfor %}
+</ul>
